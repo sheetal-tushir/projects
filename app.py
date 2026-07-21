@@ -2,8 +2,9 @@ import os
 import gradio as gr
 import joblib
 
-# Load model
+# Load trained model
 deployed_dt = joblib.load("diabetes_prediction_model.pkl")
+
 
 def predict_diabetes(pregnancies, glucose, insulin, bmi, age):
     input_data = [[pregnancies, glucose, insulin, bmi, age]]
@@ -13,6 +14,7 @@ def predict_diabetes(pregnancies, glucose, insulin, bmi, age):
         return "Prediction: High Risk of Diabetes (Positive)"
     else:
         return "Prediction: Low Risk of Diabetes (Negative)"
+
 
 interface = gr.Interface(
     fn=predict_diabetes,
@@ -25,14 +27,17 @@ interface = gr.Interface(
     ],
     outputs=gr.Text(label="Assessment Result"),
     title="Diabetes Prediction System",
-    description="Enter the medical metrics to predict diabetes risk."
+    description="""
+Enter the medical metrics to predict diabetes risk.
+
 Developed by: Sheetal
 
 Panipat Institute of Engineering & Technology (PIET)
 
-Enter the medical metrics to predict diabetes risk using a Decision Tree Machine Learning model.
-"""
+This application predicts diabetes risk using a Decision Tree Machine Learning model.
+""",
 )
+
 
 if __name__ == "__main__":
     interface.launch(
