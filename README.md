@@ -1,1 +1,1 @@
-# projects
+#diabetes-prediction
